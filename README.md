@@ -1,16 +1,13 @@
-# swchat
+# SWChat
 
-Chat around the world
+Application Flutter permettant de communiquer grace à Firebase (fireauth pour les connexions, firestore pour les messages et profils, storage pour les images de profil).
 
-## Getting Started
+## Code
 
-This project is a starting point for a Flutter application.
+Tout le code dart de ce projet est disponible. Il manque juste les fichiers de configuration de Firebase
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Principales fonctions implémentées :
+- Envoi de messages aux contacts
+- Ajout de contacts (en développement)
+- Liste de contacts favoris
+- Stockage d'image de profil en ligne
