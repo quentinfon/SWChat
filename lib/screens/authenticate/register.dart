@@ -28,9 +28,9 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Theme.of(context).accentColor,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         title: Text(
           'Inscription',
@@ -45,11 +45,16 @@ class _RegisterState extends State<Register> {
             onPressed: (){
               widget.toggleView();
             },
-            icon: Icon(Icons.person),
+            icon: Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
             label: Text(
               'Connexion',
               style: TextStyle(
                 fontFamily: 'NunitoSans',
+                color: Colors.white,
+                fontWeight: FontWeight.w600
               ),
             ),
           ),

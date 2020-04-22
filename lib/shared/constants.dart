@@ -13,10 +13,10 @@ const textInputDecoration = InputDecoration(
       fontFamily: 'NunitoSans'
   ),
   enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.white, width: 2)
+      borderSide: BorderSide(color: Colors.grey, width: 2)
   ),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.black45, width: 2)
+      borderSide: BorderSide(color: Colors.blueGrey, width: 2)
   ),
   focusColor: Colors.black,
   hoverColor: Colors.black,

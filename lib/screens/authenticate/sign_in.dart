@@ -30,9 +30,9 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
 
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Theme.of(context).accentColor,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         title: Text(
           'Connexion',
@@ -47,11 +47,15 @@ class _SignInState extends State<SignIn> {
             onPressed: (){
               widget.toggleView();
             },
-            icon: Icon(Icons.person),
+            icon: Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
             label: Text(
               'Inscription',
               style: TextStyle(
                 fontFamily: 'NunitoSans',
+                color: Colors.white
               ),
             ),
           ),
@@ -82,7 +86,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20),
               RaisedButton(
-                color: Colors.lightGreen[600],
+                color: Theme.of(context).primaryColor,
                 child: Text(
                   'Connexion',
                   style: TextStyle(
