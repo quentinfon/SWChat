@@ -10,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:swchat/services/dataHolder.dart';
 import 'package:swchat/services/database.dart';
 import 'package:swchat/widgets/user/ProfilImage.dart';
+import 'package:swchat/widgets/user/infos_utilisateur.dart';
 import 'package:swchat/widgets/user/userMessage.dart';
 
 
@@ -27,14 +28,6 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            iconSize: 30.0,
-            color: Colors.white,
-            onPressed: (){
-
-            },
-          ),
           title: Text(
             'Chats',
             style: TextStyle(
@@ -56,6 +49,43 @@ class Home extends StatelessWidget {
               iconSize: 30,
             ),
           ],
+        ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              SizedBox(height: 50),
+              Container(
+                child: InfosUtilisateur(),
+              ),
+              ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text('Profile'),
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Settings'),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.not_interested,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'Deconnexion',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontFamily: 'NunitoSans',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+                onTap: () async{
+                  await _auth.signOut();
+                },
+              ),
+            ],
+          ),
         ),
         body: Container(
           child: HomeScreen(),
