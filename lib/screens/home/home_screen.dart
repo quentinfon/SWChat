@@ -21,7 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return data == null ? Loading() : Column(
       children: <Widget>[
-        CategorySelector(),
+        Container(
+          height: 20,
+          color: Theme.of(context).primaryColor,
+        ),
         Expanded(
           child: Container(
             decoration: BoxDecoration(
