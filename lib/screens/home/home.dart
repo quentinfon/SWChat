@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:swchat/services/dataHolder.dart';
 import 'package:swchat/services/database.dart';
+import 'package:swchat/widgets/home/a_propos.dart';
 import 'package:swchat/widgets/user/ProfilImage.dart';
 import 'package:swchat/widgets/user/infos_utilisateur.dart';
 import 'package:swchat/widgets/user/userMessage.dart';
@@ -20,6 +21,15 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    void _showSettingsPanel(){
+      showModalBottomSheet(context: context, builder: (context){
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+          child: APropos(),
+        );
+      });
+    }
 
     User user = Provider.of<User>(context);
 
@@ -59,12 +69,27 @@ class Home extends StatelessWidget {
                 child: InfosUtilisateur(),
               ),
               ListTile(
-                leading: Icon(Icons.account_circle),
-                title: Text('Profile'),
+                leading: Icon(Icons.settings),
+                title: Text(
+                  'Settings',
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
               ),
               ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
+                onTap: () => _showSettingsPanel(),
+                leading: Icon(Icons.info_outline),
+                title: Text(
+                  'À propos',
+                  style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500
+                  ),
+                ),
               ),
               ListTile(
                 leading: Icon(

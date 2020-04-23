@@ -52,6 +52,21 @@ class _InfosUtilisateurState extends State<InfosUtilisateur> {
               color: Colors.blueGrey
             ),
           ),
+          SizedBox(height: 10),
+          FlatButton.icon(
+              onPressed: (){ },
+              icon: Icon(
+                Icons.edit,
+                color: Colors.grey,
+              ),
+              label: Text(
+                'Modifier',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'NunitoSans'
+                ),
+              )
+          ),
           Divider(
             height: 50,
             color: Colors.grey[800],
