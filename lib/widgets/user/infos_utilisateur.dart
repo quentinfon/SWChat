@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swchat/models/user.dart';
+import 'package:swchat/screens/home/edit_profil.dart';
 import 'package:swchat/shared/loading.dart';
 import 'package:swchat/widgets/user/ProfilImage.dart';
 
@@ -54,7 +55,13 @@ class _InfosUtilisateurState extends State<InfosUtilisateur> {
           ),
           SizedBox(height: 10),
           FlatButton.icon(
-              onPressed: (){ },
+              onPressed: (){
+                Navigator.push(
+                    context, MaterialPageRoute(
+                  builder: (_) => EditProfil(),
+                )
+                );
+              },
               icon: Icon(
                 Icons.edit,
                 color: Colors.grey,
