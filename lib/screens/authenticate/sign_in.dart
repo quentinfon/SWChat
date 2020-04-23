@@ -55,7 +55,8 @@ class _SignInState extends State<SignIn> {
               'Inscription',
               style: TextStyle(
                 fontFamily: 'NunitoSans',
-                color: Colors.white
+                color: Colors.white,
+                fontWeight: FontWeight.w600
               ),
             ),
           ),
@@ -65,61 +66,63 @@ class _SignInState extends State<SignIn> {
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: Form(
           key: _formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20),
-              TextFormField(
-                validator: (val) => val.isEmpty ? 'Entrez un email' : null,
-                decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                onChanged: (val){
-                  setState(() => email = val);
-                },
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                validator: (val) => val.length < 6 ? 'Le mot de passe doit faire au moins 6 caractères' : null,
-                decoration: textInputDecoration.copyWith(hintText: 'Mot de passe'),
-                onChanged: (val){
-                  setState(() => password = val);
-                },
-                obscureText: true,
-              ),
-              SizedBox(height: 20),
-              RaisedButton(
-                color: Theme.of(context).primaryColor,
-                child: Text(
-                  'Connexion',
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 20),
+                TextFormField(
+                  validator: (val) => val.isEmpty ? 'Entrez un email' : null,
+                  decoration: textInputDecoration.copyWith(hintText: 'Email'),
+                  onChanged: (val){
+                    setState(() => email = val);
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  validator: (val) => val.length < 6 ? 'Le mot de passe doit faire au moins 6 caractères' : null,
+                  decoration: textInputDecoration.copyWith(hintText: 'Mot de passe'),
+                  onChanged: (val){
+                    setState(() => password = val);
+                  },
+                  obscureText: true,
+                ),
+                SizedBox(height: 20),
+                RaisedButton(
+                  color: Theme.of(context).primaryColor,
+                  child: Text(
+                    'Connexion',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'NunitoSans',
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  onPressed: () async {
+                    if(_formKey.currentState.validate()){
+
+                      setState(() => loading = true);
+
+                      dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+
+                      if(result == null){
+                        setState(() {
+                          error = 'Mauvais identifiants';
+                          loading = false;
+                        });
+                      }
+                    }
+                  },
+                ),
+                SizedBox(height: 12),
+                Text(
+                  error,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'NunitoSans',
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
+                    color: Colors.red,
                   ),
                 ),
-                onPressed: () async {
-                  if(_formKey.currentState.validate()){
-
-                    setState(() => loading = true);
-
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-
-                    if(result == null){
-                      setState(() {
-                        error = 'Mauvais identifiants';
-                        loading = false;
-                      });
-                    }
-                  }
-                },
-              ),
-              SizedBox(height: 12),
-              Text(
-                error,
-                style: TextStyle(
-                  color: Colors.red,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

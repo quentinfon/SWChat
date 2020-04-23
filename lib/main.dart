@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:swchat/models/user.dart';
 import 'package:swchat/screens/wrapper.dart';
 import 'package:swchat/services/auth.dart';
@@ -10,6 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
 
     return StreamProvider<User>.value(
       value: AuthService().user,

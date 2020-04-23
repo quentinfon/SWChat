@@ -64,89 +64,91 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: Form(
           key: _formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20),
-              TextFormField(
-                validator: (val) => val.isEmpty ? 'Entrez un email' : null,
-                decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                onChanged: (val){
-                  setState(() => email = val);
-                },
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                validator: (val){
-                  if(val.isEmpty){
-                    return 'Entrez un mot de passe';
-                  }else if(val != password2){
-                    return 'Les mots de passes doivent etre identique';
-                  }else if(val.length < 6){
-                    return 'Le mot de passe doit contenir au moins 6 caractères';
-                  }else{
-                    return null;
-                  }
-                },
-                decoration: textInputDecoration.copyWith(hintText: 'Mot de passe'),
-                onChanged: (val){
-                  setState(() => password1 = val);
-                },
-                obscureText: true,
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                validator: (val){
-                  if(val.isEmpty){
-                    return 'Entrez un mot de passe';
-                  }else if(val != password1){
-                    return 'Les mots de passes doivent etre identique';
-                  }else if(val.length < 6){
-                    return 'Le mot de passe doit contenir au moins 6 caractères';
-                  }else{
-                    return null;
-                  }
-                },
-                decoration: textInputDecoration.copyWith(hintText: 'Mot de passe'),
-                onChanged: (val){
-                  setState(() => password2 = val);
-                },
-                obscureText: true,
-              ),
-              SizedBox(height: 20),
-              RaisedButton(
-                color: Colors.grey[800],
-                child: Text(
-                  'Inscription',
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 20),
+                TextFormField(
+                  validator: (val) => val.isEmpty ? 'Entrez un email' : null,
+                  decoration: textInputDecoration.copyWith(hintText: 'Email'),
+                  onChanged: (val){
+                    setState(() => email = val);
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  validator: (val){
+                    if(val.isEmpty){
+                      return 'Entrez un mot de passe';
+                    }else if(val != password2){
+                      return 'Les mots de passes doivent etre identique';
+                    }else if(val.length < 6){
+                      return 'Le mot de passe doit contenir au moins 6 caractères';
+                    }else{
+                      return null;
+                    }
+                  },
+                  decoration: textInputDecoration.copyWith(hintText: 'Mot de passe'),
+                  onChanged: (val){
+                    setState(() => password1 = val);
+                  },
+                  obscureText: true,
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  validator: (val){
+                    if(val.isEmpty){
+                      return 'Entrez un mot de passe';
+                    }else if(val != password1){
+                      return 'Les mots de passes doivent etre identique';
+                    }else if(val.length < 6){
+                      return 'Le mot de passe doit contenir au moins 6 caractères';
+                    }else{
+                      return null;
+                    }
+                  },
+                  decoration: textInputDecoration.copyWith(hintText: 'Mot de passe'),
+                  onChanged: (val){
+                    setState(() => password2 = val);
+                  },
+                  obscureText: true,
+                ),
+                SizedBox(height: 20),
+                RaisedButton(
+                  color: Colors.grey[800],
+                  child: Text(
+                    'Inscription',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'NunitoSans',
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  onPressed: () async {
+                    if(_formKey.currentState.validate()){
+
+                      setState(() => loading = true);
+
+                      dynamic result = await _auth.registerWithEmailAndPassword(email, password1);
+                      if(result == null){
+                        setState((){
+                          error = 'Email invalide';
+                          loading = false;
+                        });
+                      }
+                    }
+                  },
+                ),
+                SizedBox(height: 12),
+                Text(
+                  error,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'NunitoSans',
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
+                    color: Colors.red,
                   ),
                 ),
-                onPressed: () async {
-                  if(_formKey.currentState.validate()){
-
-                    setState(() => loading = true);
-
-                    dynamic result = await _auth.registerWithEmailAndPassword(email, password1);
-                    if(result == null){
-                      setState((){
-                        error = 'Email invalide';
-                        loading = false;
-                      });
-                    }
-                  }
-                },
-              ),
-              SizedBox(height: 12),
-              Text(
-                error,
-                style: TextStyle(
-                  color: Colors.red,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
