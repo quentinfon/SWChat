@@ -225,4 +225,15 @@ class DatabaseService {
 
   }
 
+  //Edit du profil
+  Future profilUpdate(String nom, String bio, String urlImage) async {
+    return await profilCollection.document(uid).updateData({
+      'uid': uid,
+      'nom': nom,
+      'bio': bio,
+      'urlImage': urlImage,
+    });
+  }
+
+
 }

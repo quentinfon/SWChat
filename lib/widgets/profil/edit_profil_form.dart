@@ -40,6 +40,9 @@ class _EditProfilFormState extends State<EditProfilForm> {
 
     nomController.text = data.nom;
     bioController.text = data.bio;
+    nom = data.nom;
+    bio = data.bio;
+
   }
 
 
@@ -135,7 +138,18 @@ class _EditProfilFormState extends State<EditProfilForm> {
             SizedBox(height: 20),
             FlatButton.icon(
               color: Theme.of(context).primaryColor,
-              onPressed: (){},
+              onPressed: () async {
+
+                if(!loading){
+                  loading = true;
+
+                  await DatabaseService(uid: userData.uid).profilUpdate(nom, bio, userData.imageUrl);
+
+
+                  loading = false;
+                }
+
+              },
               icon: Icon(
                 Icons.save,
                 color: Colors.white,
