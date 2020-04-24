@@ -87,6 +87,15 @@ class UserData {
 
   }
 
+  bool estEnContactAvec(String uidContact){
+    for(Contact c in contact){
+      if(c.uid == uidContact){
+        return true;
+      }
+    }
+    return false;
+  }
+
 }
 
 
