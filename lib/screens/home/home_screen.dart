@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swchat/models/user.dart';
 import 'package:swchat/shared/loading.dart';
-import 'package:swchat/widgets/home/category_selector.dart';
 import 'package:swchat/widgets/home/chat_list.dart';
 import 'package:swchat/widgets/home/favorite_contact.dart';
 

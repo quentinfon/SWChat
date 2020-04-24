@@ -235,5 +235,12 @@ class DatabaseService {
     });
   }
 
+  // get all users
+  Stream<List<UserData>> get allUsersData {
+
+    return profilCollection.snapshots().map((_userDataListFromSnapshot));
+
+  }
+
 
 }

@@ -1,18 +1,12 @@
-import 'dart:typed_data';
-
 import 'package:provider/provider.dart';
 import 'package:swchat/models/user.dart';
 import 'package:swchat/screens/home/home_screen.dart';
+import 'package:swchat/screens/home/recherche_contact.dart';
 import 'package:swchat/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-
-import 'package:swchat/services/dataHolder.dart';
 import 'package:swchat/services/database.dart';
 import 'package:swchat/widgets/home/a_propos.dart';
-import 'package:swchat/widgets/user/ProfilImage.dart';
 import 'package:swchat/widgets/user/infos_utilisateur.dart';
-import 'package:swchat/widgets/user/userMessage.dart';
 
 
 class Home extends StatelessWidget {
@@ -49,8 +43,8 @@ class Home extends StatelessWidget {
           centerTitle: true,
           actions: <Widget>[
             IconButton(
-              onPressed: () async {
-                await _auth.signOut();
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch(utilisateur: user));
               },
               icon: Icon(
                 Icons.search,
