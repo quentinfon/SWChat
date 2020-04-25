@@ -32,6 +32,11 @@ class DatabaseService {
 
     bool present = false;
     List<Map<String, dynamic>> listC1 = contact1.getContactList();
+
+    listC1.removeWhere((m){
+      return (m.length == 0 || m['uid'] == null);
+    });
+
     for(Map<String, dynamic> contact in listC1){
       if(contact['uid'] == contact2.uid){
         contact['lastContact'] = Timestamp.now();
@@ -48,9 +53,15 @@ class DatabaseService {
 
     present = false;
     List<Map<String, dynamic>> listC2 = contact2.getContactList();
+
+    listC2.removeWhere((m){
+      return (m.length == 0 || m['uid'] == null);
+    });
+
     for(Map<String, dynamic> contact in listC2){
       if(contact['uid'] == contact1.uid){
         contact['lastContact'] = Timestamp.now();
+        present = true;
       }
     }
     if(!present){
@@ -60,24 +71,19 @@ class DatabaseService {
       });
     }
 
+    listC1.remove({});
+    listC2.remove({});
+
+    print(listC1);
+    print(listC2);
     try{
 
-      await profilCollection.document(contact1.uid).setData({
-        'uid': contact1.uid,
-        'nom': contact1.nom,
-        'bio': contact1.bio,
-        'urlImage': contact1.imageUrl,
-        'favoirteContact': contact1.favoirteContact,
-        'contact': listC1,
+      await profilCollection.document(contact1.uid).updateData({
+        'contact': listC1
       });
 
-      await profilCollection.document(contact2.uid).setData({
-        'uid': contact2.uid,
-        'nom': contact2.nom,
-        'bio': contact2.bio,
-        'urlImage': contact2.imageUrl,
-        'favoirteContact': contact2.favoirteContact,
-        'contact': listC2,
+      await profilCollection.document(contact2.uid).updateData({
+        'contact': listC2
       });
 
       return true;
