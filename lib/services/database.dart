@@ -30,18 +30,34 @@ class DatabaseService {
 
   Future setTimeLastMsg(UserData contact1, UserData contact2) async {
 
+    bool present = false;
     List<Map<String, dynamic>> listC1 = contact1.getContactList();
     for(Map<String, dynamic> contact in listC1){
       if(contact['uid'] == contact2.uid){
         contact['lastContact'] = Timestamp.now();
+        present = true;
       }
     }
+    if(!present){
+      listC1.add({
+        'uid': contact2.uid,
+        'lastContact': Timestamp.now()
+      });
+    }
 
+
+    present = false;
     List<Map<String, dynamic>> listC2 = contact2.getContactList();
     for(Map<String, dynamic> contact in listC2){
       if(contact['uid'] == contact1.uid){
         contact['lastContact'] = Timestamp.now();
       }
+    }
+    if(!present){
+      listC2.add({
+        'uid': contact1.uid,
+        'lastContact': Timestamp.now()
+      });
     }
 
     try{
