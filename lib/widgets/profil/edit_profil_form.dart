@@ -145,6 +145,7 @@ class _EditProfilFormState extends State<EditProfilForm> {
 
                   await DatabaseService(uid: userData.uid).profilUpdate(nom, bio, userData.imageUrl);
 
+                  Navigator.pop(context);
 
                   loading = false;
                 }
