@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
 
   final preferences = await StreamingSharedPreferences.instance;
   final settings = MyAppSettings(preferences);
@@ -70,7 +69,7 @@ class _MyAppState extends State<MyApp> {
 
 class MyAppSettings {
   MyAppSettings(StreamingSharedPreferences preferences)
-      : couleur = preferences.getString('couleur', defaultValue: 'bleu');
+      : couleur = preferences.getString('couleur', defaultValue: 'rouge');
 
   final Preference<String> couleur;
 
