@@ -129,7 +129,7 @@ class DatabaseService {
   }
   Stream<List<UserData>> get getListContactFav {
 
-    List<String> liste = listeDeContactFav ?? [ 'null' ];
+    List<String> liste = listeDeContactFav.isEmpty ? [ 'null' ] : listeDeContactFav;
 
     return profilCollection.where('uid', whereIn: liste).snapshots().map((_userDataListFromSnapshot));
 
