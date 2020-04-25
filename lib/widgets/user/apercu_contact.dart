@@ -33,62 +33,74 @@ class _ApercuContactState extends State<ApercuContact> {
           }
 
           //Verification pour ajouter le contact
-          if(userData != null){
-
+          if(userData != null && !userData.estEnContactAvec(widget.contact.uid) && userData.uid != widget.contact.uid){
+            peutEtreAjouter = true;
           }
 
-          return userData == null ? Loading() : Container(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 150.0,
-                  width: 150.0,
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100.0),
-                    child: ProfilImage(url: widget.contact.imageUrl),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  widget.contact.nom,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'NunitoSans'
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  widget.contact.bio,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: 'NunitoSans',
-                      color: Colors.blueGrey
-                  ),
-                ),
-                SizedBox(height: 10),
-                peutEtreAjouter ? FlatButton.icon(
-                    onPressed: () {
 
-                    },
-                    icon: Icon(
-                      Icons.person_add,
-                      color: Colors.grey,
+          return userData == null ? Loading() : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 50),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 150.0,
+                      width: 150.0,
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100.0),
+                        child: ProfilImage(url: widget.contact.imageUrl),
+                      ),
                     ),
-                    label: Text(
-                      'Ajouter au contacts',
+                    SizedBox(height: 10),
+                    Text(
+                      widget.contact.nom,
                       style: TextStyle(
-                          color: Colors.grey,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                           fontFamily: 'NunitoSans'
                       ),
-                    )
-                ) : SizedBox(),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      widget.contact.bio,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'NunitoSans',
+                          color: Colors.blueGrey
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    peutEtreAjouter ? FlatButton.icon(
+                        onPressed: () async{
 
-              ],
-            ),
+                          await DatabaseService().setTimeLastMsg(userData, widget.contact);
+                          setState(() {
+                            peutEtreAjouter = false;
+                          });
+
+                        },
+                        icon: Icon(
+                          Icons.person_add,
+                          color: Colors.grey,
+                        ),
+                        label: Text(
+                          'Ajouter au contacts',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: 'NunitoSans'
+                          ),
+                        )
+                    ) : SizedBox(),
+
+                  ],
+                ),
+              ),
+            ],
           );
         });
   }
