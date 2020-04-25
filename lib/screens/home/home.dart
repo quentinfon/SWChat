@@ -2,14 +2,20 @@ import 'package:provider/provider.dart';
 import 'package:swchat/models/user.dart';
 import 'package:swchat/screens/home/home_screen.dart';
 import 'package:swchat/screens/home/recherche_contact.dart';
+import 'package:swchat/screens/parametre.dart';
 import 'package:swchat/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swchat/services/database.dart';
 import 'package:swchat/widgets/home/a_propos.dart';
 import 'package:swchat/widgets/user/infos_utilisateur.dart';
 
+import '../../main.dart';
+
 
 class Home extends StatelessWidget {
+
+  final MyAppSettings settings;
+  Home(this.settings);
 
   final AuthService _auth = AuthService();
 
@@ -63,9 +69,15 @@ class Home extends StatelessWidget {
                 child: InfosUtilisateur(),
               ),
               ListTile(
+                onTap: (){
+                  Navigator.push(
+                      context, MaterialPageRoute(
+                    builder: (_) => ParametreScreen(settings),
+                  ));
+                },
                 leading: Icon(Icons.settings),
                 title: Text(
-                  'Settings',
+                  'Paramètres',
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 15,
