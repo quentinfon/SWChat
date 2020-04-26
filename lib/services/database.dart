@@ -264,5 +264,12 @@ class DatabaseService {
 
   }
 
+  //Edit du profil
+  Future updateContactsFav(List<String> contactsFav) async {
+    return await profilCollection.document(uid).updateData({
+      'favoirteContact': contactsFav
+    });
+  }
+
 
 }

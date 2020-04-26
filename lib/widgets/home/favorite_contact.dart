@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swchat/models/user.dart';
+import 'package:swchat/screens/home/ajout_favoris.dart';
 import 'package:swchat/screens/home/chat_screen.dart';
 import 'package:swchat/services/database.dart';
 import 'package:swchat/shared/loading.dart';
@@ -76,7 +77,13 @@ class _FavoriteContactsState extends State<FavoriteContacts> {
                           color: Colors.grey,
                         ),
                         iconSize: 60,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context, MaterialPageRoute(
+                              builder: (_) => AjoutFavorisScreen(userUid: widget.data.uid),
+                            )
+                          );
+                        },
                       );
                     }
 
