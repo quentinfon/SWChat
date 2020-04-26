@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:swchat/models/message.dart';
 import 'package:swchat/models/user.dart';
 import 'package:swchat/screens/home/chat_screen.dart';
 import 'package:swchat/services/database.dart';
 import 'package:swchat/widgets/user/contact_tile.dart';
-import 'package:swchat/screens/home/chat_screen.dart';
+
 
 
 class ChatList extends StatefulWidget {

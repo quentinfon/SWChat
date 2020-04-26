@@ -102,7 +102,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           topLeft: Radius.circular(30),
                         )
                       ),
-                      child: MessagesContainer(uidContact: contact.uid),
+                      child: MessagesContainer(uidContact: contact.uid, userUid: Provider.of<User>(context).uid),
                     ),
                   ),
                   MessageComposer(contact: contact),

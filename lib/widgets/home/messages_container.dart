@@ -3,13 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:swchat/models/message.dart';
 import 'package:swchat/models/user.dart';
 import 'package:swchat/services/database.dart';
+import 'package:swchat/services/message.dart';
 import 'package:swchat/shared/loading.dart';
 
 class MessagesContainer extends StatefulWidget {
 
   final String uidContact;
+  final String userUid;
 
-  MessagesContainer({this.uidContact});
+  MessagesContainer({this.uidContact, this.userUid});
 
   @override
   _MessagesContainerState createState() => _MessagesContainerState();
@@ -125,6 +127,14 @@ class _MessagesContainerState extends State<MessagesContainer> {
                   itemBuilder: (BuildContext context, int index){
                     final Message msg = messages[index];
                     final bool isMe = msg.sender == user.uid;
+
+                    //Vu des message
+                    if(msg.sender == widget.uidContact && !msg.read){
+
+                      MessageService().updateReadMsg([widget.uidContact, widget.userUid], widget.uidContact);
+
+                    }
+
                     return _buildMessage(msg, isMe);
                   },
                 ),

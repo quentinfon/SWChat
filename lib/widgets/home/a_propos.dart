@@ -19,7 +19,7 @@ class APropos extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Text(
-            'Application réalisé par Quentin Fontaine',
+            'Application réalisée par Quentin Fontaine',
             style: TextStyle(
               fontSize: 15,
               color: Colors.grey[900],

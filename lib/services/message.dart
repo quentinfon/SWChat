@@ -20,5 +20,19 @@ class MessageService {
     });
 
   }
+  
+  Future updateReadMsg(List<String> membres, String uidSender){
+    
+    List<String> search = membres..sort();
+
+    return messageCollection.where('membres', isEqualTo: search).where('sender', isEqualTo: uidSender).where('read', isEqualTo: false).getDocuments().then((reponse){
+      reponse.documents.forEach( (doc){
+        messageCollection.document(doc.documentID).updateData({
+          'read': true
+        });
+      });
+    });
+    
+  }
 
 }
