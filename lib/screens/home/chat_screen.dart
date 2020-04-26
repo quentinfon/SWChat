@@ -7,6 +7,7 @@ import 'package:swchat/services/database.dart';
 import 'package:swchat/shared/loading.dart';
 import 'package:swchat/widgets/home/message_composer.dart';
 import 'package:swchat/widgets/home/messages_container.dart';
+import 'package:swchat/widgets/user/apercu_contact.dart';
 
 
 class ChatScreen extends StatefulWidget {
@@ -61,7 +62,27 @@ class _ChatScreenState extends State<ChatScreen> {
                   icon: Icon(Icons.more_horiz),
                   iconSize: 30,
                   color: Colors.white,
-                  onPressed: () async { await _auth.signOut(); } ,
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(
+                      builder: (_) => Scaffold(
+                        appBar: AppBar(
+                          title: Text(
+                            'Infos contact',
+                            style: TextStyle(
+                              fontFamily: 'NunitoSans',
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25
+                            ),
+                          ),
+                          centerTitle: true,
+                          elevation: 0,
+                        ),
+                        body: ApercuContact(contact: contact, userUid: Provider.of<User>(context).uid),
+                      )
+                    ));
+                    },
                 ),
               ],
               centerTitle: true,
