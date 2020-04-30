@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
+import 'package:swchat/firebase_notification_handler.dart';
 import 'package:swchat/models/user.dart';
 import 'package:swchat/screens/wrapper.dart';
 import 'package:swchat/services/auth.dart';
@@ -26,6 +27,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    super.initState();
+    new FirebaseNotifications().setUpFirebase();
+  }
 
   Color getColor(String stringCouleur){
 

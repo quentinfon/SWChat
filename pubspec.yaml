@@ -26,6 +26,7 @@ dependencies:
   flutter_spinkit: "^4.1.2"
   cupertino_icons: ^0.1.2
   streaming_shared_preferences: ^1.0.1
+  firebase_messaging: ^6.0.13
 
 dev_dependencies:
   flutter_test:
