@@ -8,6 +8,7 @@ Tout le code dart de ce projet est disponible. Il manque juste les fichiers de c
 
 Principales fonctions implémentées :
 - Envoi de messages aux contacts
-- Ajout de contacts (en développement)
+- Ajout de contacts
 - Liste de contacts favoris
 - Stockage d'image de profil en ligne
+- Notification de message (en développement)
