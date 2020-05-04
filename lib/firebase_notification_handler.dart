@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirebaseNotifications {
-  FirebaseMessaging _firebaseMessaging;
+  static FirebaseMessaging firebaseMessaging;
 
   void setUpFirebase() {
-    _firebaseMessaging = FirebaseMessaging();
+    firebaseMessaging = FirebaseMessaging();
     firebaseCloudMessaging_Listeners();
 
   }
@@ -14,11 +15,11 @@ class FirebaseNotifications {
   void firebaseCloudMessaging_Listeners() {
     if (Platform.isIOS) iOS_Permission();
 
-    _firebaseMessaging.getToken().then((token) {
+    firebaseMessaging.getToken().then((token) {
       print(token);
     });
 
-    _firebaseMessaging.configure(
+    firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('on message $message');
       },
@@ -32,11 +33,13 @@ class FirebaseNotifications {
   }
 
   void iOS_Permission() {
-    _firebaseMessaging.requestNotificationPermissions(
+    firebaseMessaging.requestNotificationPermissions(
         IosNotificationSettings(sound: true, badge: true, alert: true));
-    _firebaseMessaging.onIosSettingsRegistered
+    firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings settings) {
       print("Settings registered: $settings");
     });
   }
+
+
 }

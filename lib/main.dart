@@ -28,10 +28,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
+  FirebaseNotifications notif = new FirebaseNotifications();
+
   @override
   void initState() {
     super.initState();
-    new FirebaseNotifications().setUpFirebase();
+    notif.setUpFirebase();
   }
 
   Color getColor(String stringCouleur){

@@ -1,4 +1,6 @@
+import 'package:swchat/firebase_notification_handler.dart';
 import 'package:swchat/services/auth.dart';
+import 'package:swchat/services/database.dart';
 import 'package:swchat/shared/constants.dart';
 import 'package:swchat/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +114,8 @@ class _SignInState extends State<SignIn> {
                             error = 'Mauvais identifiants';
                             loading = false;
                           });
+                        }else{
+                          DatabaseService().saveDeviceToken(result.uid);
                         }
                       }
                     },

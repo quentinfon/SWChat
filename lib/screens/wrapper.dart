@@ -1,3 +1,4 @@
+import 'package:swchat/firebase_notification_handler.dart';
 import 'package:swchat/models/user.dart';
 import 'package:swchat/screens/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:swchat/firebase_notification_handler.dart';
 import 'package:swchat/models/message.dart';
 import 'package:swchat/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -271,5 +274,29 @@ class DatabaseService {
     });
   }
 
+
+  saveDeviceToken(String userUid) async{
+
+    print('En cours de creation du tokken : ');
+
+    String fcmToken = await FirebaseNotifications.firebaseMessaging.getToken();
+
+    print('Tokken ---> $fcmToken');
+
+    if(fcmToken != null){
+
+      var tokenRef = Firestore.instance.collection('profil').document(userUid).collection('tokens').document(fcmToken);
+
+      await tokenRef.setData({
+        'token': fcmToken,
+        'createdAt': FieldValue.serverTimestamp(),
+        'platform': Platform.operatingSystem
+      });
+
+      print('<--- Fait --->');
+
+    }
+
+  }
 
 }
