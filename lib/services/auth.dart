@@ -62,7 +62,13 @@ class AuthService {
 
   // Sign out
   Future signOut() async {
+
+    User user = _userFromFirebaseUser(await _auth.currentUser());
+
     try{
+      if(user != null){
+        await DatabaseService().removeDeviceToken(user.uid);
+      }
       return await _auth.signOut();
     }catch(e){
       print(e.toString());

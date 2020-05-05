@@ -299,4 +299,18 @@ class DatabaseService {
 
   }
 
+  removeDeviceToken(String userUid) async{
+
+    String fcmToken = await FirebaseNotifications.firebaseMessaging.getToken();
+
+    if(fcmToken != null){
+
+      var tokenRef = Firestore.instance.collection('profil').document(userUid).collection('tokens').document(fcmToken);
+
+      await tokenRef.delete();
+
+    }
+
+  }
+
 }
