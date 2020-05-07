@@ -21,3 +21,15 @@ const textInputDecoration = InputDecoration(
   focusColor: Colors.black,
   hoverColor: Colors.black,
 );
+
+Color getColor(String stringCouleur){
+
+  if(stringCouleur == "rouge") return Colors.red;
+  if(stringCouleur == "bleu") return Colors.blue;
+  if(stringCouleur == "vert") return Colors.green;
+  if(stringCouleur == "bleufonce") return Colors.indigo[900];
+  if(stringCouleur == "violet") return Colors.purple;
+  if(stringCouleur == "noir") return Colors.black;
+
+  return Colors.red;
+}
