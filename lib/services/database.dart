@@ -42,14 +42,14 @@ class DatabaseService {
 
     for(Map<String, dynamic> contact in listC1){
       if(contact['uid'] == contact2.uid){
-        contact['lastContact'] = Timestamp.now();
+        contact['lastContact'] = FieldValue.serverTimestamp();
         present = true;
       }
     }
     if(!present){
       listC1.add({
         'uid': contact2.uid,
-        'lastContact': Timestamp.now()
+        'lastContact': FieldValue.serverTimestamp()
       });
     }
 

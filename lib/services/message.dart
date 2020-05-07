@@ -16,7 +16,7 @@ class MessageService {
       'membres': listeMembres..sort(),
       'sender' : sender,
       'text' : text,
-      'time' : Timestamp.fromMillisecondsSinceEpoch(Timestamp.now().millisecondsSinceEpoch+(3600*2*1000))
+      'time' : FieldValue.serverTimestamp()
     });
 
   }
