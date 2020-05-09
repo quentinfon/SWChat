@@ -1,4 +1,5 @@
 import 'package:swchat/services/auth.dart';
+import 'package:swchat/services/database.dart';
 import 'package:swchat/shared/constants.dart';
 import 'package:swchat/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -138,6 +139,8 @@ class _RegisterState extends State<Register> {
                             error = 'Email invalide';
                             loading = false;
                           });
+                        }else{
+                          DatabaseService().saveDeviceToken(result.uid);
                         }
                       }
                     },
